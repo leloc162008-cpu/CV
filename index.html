@@ -1,203 +1,963 @@
 <!DOCTYPE html>
-<!-- lang="vi" khai báo ngôn ngữ trang → hỗ trợ screen reader & SEO -->
 <html lang="vi">
-
 <head>
-  <!-- ========== METADATA BẮT BUỘC ========== -->
-  <meta charset="UTF-8" />
-  <!-- viewport: nền tảng của responsive mobile-first, khóa tỉ lệ 1:1 với thiết bị -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Portfolio CV của Nguyễn Văn An – Frontend Developer. Dự án, kỹ năng và thông tin liên hệ." />
-  <meta name="author" content="Nguyễn Văn An" />
-  <title>Nguyễn Văn An · Frontend Developer</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lê Công Lộc | Football CV</title>
 
-  <!-- Liên kết tới file CSS tách rời (yêu cầu của bài) -->
-  <link rel="stylesheet" href="./assets/css/styles.css" />
+  <style>
+    :root {
+      --bg: #07100d;
+      --panel: #102019;
+      --green: #a5ff32;
+      --white: #f5fff5;
+      --muted: #a7b8ad;
+      --border: #294638;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1150px;
+      margin: auto;
+    }
+
+    /* THANH MENU */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7, 16, 13, 0.95);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+    }
+
+    nav {
+      min-height: 75px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: 900;
+    }
+
+    .logo span,
+    .green {
+      color: var(--green);
+    }
+
+    .menu {
+      display: flex;
+      gap: 25px;
+      flex-wrap: wrap;
+    }
+
+    .menu a {
+      font-size: 13px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .menu a:hover {
+      color: var(--green);
+    }
+
+    /* TRANG CHỦ */
+    .hero {
+      position: relative;
+      min-height: 650px;
+      display: flex;
+      align-items: center;
+      background:
+        linear-gradient(
+          90deg,
+          rgba(3, 12, 8, 0.97),
+          rgba(3, 12, 8, 0.65)
+        ),
+        url(
+          "https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=1800&q=85"
+        );
+      background-position: center;
+      background-size: cover;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(
+        0deg,
+        var(--bg),
+        transparent 40%
+      );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 10px 18px;
+      border: 1px solid var(--green);
+      border-radius: 30px;
+      color: var(--green);
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+
+    .hero h1 {
+      margin: 25px 0;
+      font-size: clamp(45px, 9vw, 100px);
+      line-height: 1.05;
+      font-weight: 900;
+      letter-spacing: -2px;
+    }
+
+    .hero p {
+      max-width: 600px;
+      color: #d0ded3;
+      font-size: 17px;
+      line-height: 1.8;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 15px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 15px 25px;
+      border: 1px solid var(--green);
+      border-radius: 7px;
+      font-weight: bold;
+      font-size: 13px;
+      transition: 0.3s;
+    }
+
+    .btn-primary {
+      background: var(--green);
+      color: #06100c;
+    }
+
+    .btn:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 0 25px #a5ff3260;
+    }
+
+    /* DẢI LED CHẠY NGANG */
+    .led-bar {
+      overflow: hidden;
+      background: var(--green);
+      color: #07100d;
+      padding: 14px 0;
+      white-space: nowrap;
+      font-weight: 900;
+      letter-spacing: 3px;
+    }
+
+    .led-text {
+      display: inline-block;
+      animation: ledMove 18s linear infinite;
+    }
+
+    @keyframes ledMove {
+      from {
+        transform: translateX(0);
+      }
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* TIÊU ĐỀ TỪNG PHẦN */
+    section {
+      padding: 90px 0;
+      scroll-margin-top: 75px;
+    }
+
+    .section-small {
+      color: var(--green);
+      font-size: 13px;
+      letter-spacing: 3px;
+      font-weight: bold;
+    }
+
+    .section-title {
+      margin: 15px 0 35px;
+      font-size: clamp(30px, 5vw, 45px);
+      text-transform: uppercase;
+    }
+
+    /* GIỚI THIỆU */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      align-items: center;
+      gap: 45px;
+    }
+
+    .player-card {
+      min-height: 430px;
+      padding: 25px;
+      border: 2px solid var(--green);
+      border-radius: 22px;
+      background:
+        radial-gradient(
+          circle at top,
+          #315e2f,
+          #102018 65%
+        );
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 0 45px #a5ff3219;
+      transition: 0.4s;
+    }
+
+    .player-card:hover {
+      transform: rotate(-2deg) scale(1.03);
+      box-shadow: 0 0 45px #a5ff3250;
+    }
+
+    .player-top {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      font-weight: bold;
+    }
+
+    .player-number {
+      font-size: 110px;
+      font-weight: 900;
+      color: var(--green);
+      text-shadow: 0 0 35px #a5ff32a0;
+    }
+
+    .player-name {
+      font-weight: 900;
+      font-size: 22px;
+      text-align: center;
+    }
+
+    .player-bottom {
+      width: 100%;
+      padding-top: 15px;
+      border-top: 1px solid #668c63;
+      text-align: center;
+      color: #b7d8b0;
+      font-size: 12px;
+    }
+
+    .about-text {
+      color: #c8d7cb;
+      line-height: 1.9;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin-top: 25px;
+    }
+
+    .info-box {
+      padding: 17px;
+      background: #13241b;
+      border-left: 3px solid var(--green);
+    }
+
+    .info-box small {
+      display: block;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .info-box strong {
+      color: white;
+    }
+
+    /* KỸ NĂNG */
+    .skills-section {
+      background: #0b1711;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .card {
+      padding: 28px;
+      background: linear-gradient(
+        150deg,
+        #17291f,
+        #0d1712
+      );
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      border-color: var(--green);
+      box-shadow: 0 8px 30px #a5ff3215;
+    }
+
+    .card h3 {
+      margin: 12px 0;
+      font-size: 21px;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .skill-item {
+      margin-top: 25px;
+    }
+
+    .skill-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .progress {
+      height: 10px;
+      background: #28402c;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .progress span {
+      display: block;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        #57ba20,
+        var(--green)
+      );
+      border-radius: 20px;
+    }
+
+    /* DỰ ÁN */
+    .project-number {
+      font-size: 42px;
+      font-weight: 900;
+      color: var(--green);
+    }
+
+    .project-type {
+      display: inline-block;
+      margin-top: 22px;
+      color: var(--green);
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    /* THÀNH TÍCH */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .stat {
+      text-align: center;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 35px 15px;
+    }
+
+    .stat h3 {
+      font-size: 45px;
+      color: var(--green);
+      margin-bottom: 12px;
+    }
+
+    .stat p {
+      color: var(--muted);
+    }
+
+    /* LIÊN HỆ */
+    .contact {
+      background: linear-gradient(
+        120deg,
+        #142a19,
+        #09130e
+      );
+      border-top: 1px solid var(--border);
+    }
+
+    .contact p {
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 25px;
+    }
+
+    .contact-buttons {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .contact-buttons a {
+      padding: 16px 23px;
+      border: 1px solid #426044;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .contact-buttons a:hover {
+      background: var(--green);
+      color: #07100d;
+    }
+
+    footer {
+      padding: 30px;
+      text-align: center;
+      color: #91a795;
+      font-size: 13px;
+    }
+
+    /* HIỆU ỨNG XUẤT HIỆN */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: 0.7s ease;
+    }
+
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* GIAO DIỆN ĐIỆN THOẠI */
+    @media (max-width: 800px) {
+      nav {
+        padding: 15px 0;
+        flex-direction: column;
+      }
+
+      .menu {
+        justify-content: center;
+        gap: 13px;
+      }
+
+      .menu a {
+        font-size: 11px;
+      }
+
+      .hero {
+        min-height: 590px;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .player-card {
+        width: 100%;
+        max-width: 350px;
+        margin: auto;
+      }
+
+      .cards,
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 65px 0;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-  <!-- ========================================================== -->
-  <!-- HEADER: nhận diện + điều hướng chính                        -->
-  <!-- ========================================================== -->
-  <header class="site-header">
-    <div class="container header-inner">
-      <!-- Thương hiệu cá nhân -->
-      <a class="brand" href="#top" aria-label="Về đầu trang">
-        <span class="brand-mark" aria-hidden="true">A</span>
-        <span class="brand-name">Nguyễn Văn An</span>
+  <!-- THANH MENU -->
+  <header>
+    <nav class="container">
+      <a href="#home" class="logo">
+        ⚽ LOC<span>.FC</span>
       </a>
 
-      <!-- NAV dùng Flexbox (xem styles.css) -->
-      <nav class="main-nav" aria-label="Điều hướng chính">
-        <ul class="nav-list">
-          <li><a href="#about">Giới thiệu</a></li>
-          <li><a href="#skills">Kỹ năng</a></li>
-          <li><a href="#projects">Dự án</a></li>
-          <li><a href="#contact">Liên hệ</a></li>
-        </ul>
-      </nav>
-    </div>
+      <div class="menu">
+        <a href="#home">TRANG CHỦ</a>
+        <a href="#about">GIỚI THIỆU</a>
+        <a href="#skills">KỸ NĂNG</a>
+        <a href="#projects">DỰ ÁN</a>
+        <a href="#contact">LIÊN HỆ</a>
+      </div>
+    </nav>
   </header>
 
-  <!-- ========================================================== -->
-  <!-- MAIN: toàn bộ nội dung chính của trang                      -->
-  <!-- ========================================================== -->
-  <main id="top">
-    <!-- ----- SECTION: Giới thiệu / Hero ----- -->
-    <section id="about" class="hero">
-      <div class="container hero-inner">
-        <div class="hero-text">
-          <p class="eyebrow">Xin chào, tôi là</p>
-          <h1 class="hero-title">Nguyễn Văn An</h1>
-          <p class="hero-role">Frontend Developer &amp; UI Enthusiast</p>
-          <p class="hero-desc">
-            Tôi xây dựng giao diện web sạch sẽ, dễ tiếp cận và responsive.
-            Tốt nghiệp ngành Công nghệ thông tin, yêu thích HTML/CSS ngữ nghĩa
-            và trải nghiệm người dùng tối giản.
-          </p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#projects">Xem dự án</a>
-            <a class="btn btn-outline" href="#contact">Liên hệ tôi</a>
+  <main>
+
+    <!-- TRANG CHỦ -->
+    <div class="hero" id="home">
+      <div class="container hero-content">
+
+        <span class="tag">
+          WELCOME TO MY HOME GROUND
+        </span>
+
+        <h1>
+          LÊ CÔNG<br>
+          <span class="green">LOC</span>
+        </h1>
+
+        <p>
+          Sinh viên ngành Công nghệ thông tin
+          tại Đại học Đại Nam.
+          Đam mê bóng đá, lập trình và thiết kế
+          những website hiện đại.
+        </p>
+
+        <div class="buttons">
+          <a href="#about" class="btn btn-primary">
+            KHÁM PHÁ CV →
+          </a>
+
+          <a href="#contact" class="btn">
+            LIÊN HỆ TÔI
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- DẢI LED CHẠY NGANG -->
+    <div class="led-bar">
+      <div class="led-text">
+        ⚽ FOOTBALL × TECHNOLOGY ★
+        CODE WITH PASSION ★
+        NEVER STOP LEARNING ★
+        ⚽ FOOTBALL × TECHNOLOGY ★
+        CODE WITH PASSION ★
+        NEVER STOP LEARNING ★
+      </div>
+    </div>
+
+    <!-- GIỚI THIỆU -->
+    <section id="about">
+      <div class="container about-grid">
+
+        <div class="player-card reveal">
+          <div class="player-top">
+            <span>PLAYER CARD</span>
+            <span>🇻🇳 VN</span>
+          </div>
+
+          <div class="player-number">
+            10
+          </div>
+
+          <div class="player-name">
+            LÊ CÔNG LỘC
+          </div>
+
+          <div class="player-bottom">
+            IT STUDENT • FOOTBALL LOVER
           </div>
         </div>
 
-        <!-- Ảnh đại diện: dùng placeholder, thay bằng ảnh thật của bạn -->
-        <figure class="hero-avatar">
-          <img
-            src="./assets/img/avatar.jpg"
-            alt="Ảnh đại diện của Nguyễn Văn An"
-            width="320" height="320" />
-        </figure>
+        <div class="reveal">
+
+          <p class="section-small">
+            01 / PLAYER PROFILE
+          </p>
+
+          <h2 class="section-title">
+            GIỚI THIỆU
+            <span class="green">BẢN THÂN</span>
+          </h2>
+
+          <p class="about-text">
+            Xin chào! Mình là LÊ CÔNG LỘC,
+            sinh viên ngành Công nghệ thông tin
+            tại Đại học Đại Nam.
+            Mình yêu thích bóng đá và lập trình.
+
+            Mình luôn cố gắng rèn luyện kỹ năng,
+            học hỏi kiến thức mới và phát triển
+            những dự án công nghệ sáng tạo.
+          </p>
+
+          <div class="info-grid">
+
+            <div class="info-box">
+              <small>TRƯỜNG HỌC</small>
+              <strong>Đại học Đại Nam</strong>
+            </div>
+
+            <div class="info-box">
+              <small>NGÀNH HỌC</small>
+              <strong>Công nghệ thông tin</strong>
+            </div>
+
+            <div class="info-box">
+              <small>LỚP</small>
+              <strong>CNTT 20-01</strong>
+            </div>
+
+            <div class="info-box">
+              <small>SỞ THÍCH</small>
+              <strong>Đá bóng • Lập trình</strong>
+            </div>
+
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- ----- SECTION: Kỹ năng ----- -->
-    <section id="skills" class="section">
+    <!-- KỸ NĂNG -->
+    <section id="skills" class="skills-section">
       <div class="container">
-        <h2 class="section-title">Kỹ năng</h2>
-        <p class="section-sub">Những công nghệ và kỹ năng tôi sử dụng thường xuyên.</p>
 
-        <ul class="skill-grid">
-          <li class="skill-chip">HTML5</li>
-          <li class="skill-chip">CSS3 / Flexbox / Grid</li>
-          <li class="skill-chip">JavaScript (ES6+)</li>
-          <li class="skill-chip">Responsive Design</li>
-          <li class="skill-chip">Git &amp; GitHub</li>
-          <li class="skill-chip">Figma / Wireframe</li>
-        </ul>
+        <p class="section-small">
+          02 / MY TRAINING
+        </p>
+
+        <h2 class="section-title">
+          KỸ NĂNG <span class="green">CỦA TÔI</span>
+        </h2>
+
+        <div class="cards">
+
+          <div class="card reveal">
+            <h3>💻 Lập trình Web</h3>
+
+            <p>
+              Đang học HTML, CSS và JavaScript
+              để xây dựng website.
+            </p>
+
+            <div class="skill-item">
+              <div class="skill-label">
+                <span>HTML</span>
+                <span>70%</span>
+              </div>
+
+              <div class="progress">
+                <span style="width:70%"></span>
+              </div>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-label">
+                <span>CSS</span>
+                <span>60%</span>
+              </div>
+
+              <div class="progress">
+                <span style="width:60%"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card reveal">
+            <h3>⚽ Làm việc nhóm</h3>
+
+            <p>
+              Phối hợp với đồng đội,
+              giao tiếp và cùng nhau
+              giải quyết các vấn đề.
+            </p>
+
+            <div class="skill-item">
+              <div class="skill-label">
+                <span>Teamwork</span>
+                <span>80%</span>
+              </div>
+
+              <div class="progress">
+                <span style="width:80%"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card reveal">
+            <h3>🚀 Tự học</h3>
+
+            <p>
+              Chủ động tìm hiểu công nghệ,
+              học kỹ năng mới và cải thiện
+              bản thân mỗi ngày.
+            </p>
+
+            <div class="skill-item">
+              <div class="skill-label">
+                <span>Learning</span>
+                <span>75%</span>
+              </div>
+
+              <div class="progress">
+                <span style="width:75%"></span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <p style="color:#a7b8ad;font-size:12px;margin-top:18px">
+          *Tỷ lệ kỹ năng chỉ là ví dụ, có thể thay đổi.
+        </p>
+
       </div>
     </section>
 
-    <!-- ----- SECTION: Dự án (danh sách thẻ dùng CSS Grid) ----- -->
-    <section id="projects" class="section section-muted">
+    <!-- DỰ ÁN -->
+    <section id="projects">
       <div class="container">
-        <h2 class="section-title">Dự án tiêu biểu</h2>
-        <p class="section-sub">Một vài sản phẩm tôi đã thực hiện.</p>
 
-        <!-- .project-grid dùng CSS Grid (xem styles.css) -->
-        <div class="project-grid">
+        <p class="section-small">
+          03 / MATCH HIGHLIGHTS
+        </p>
 
-          <!-- Mỗi thẻ là một <article> độc lập, có thể đứng riêng -->
-          <article class="card">
-            <img class="card-media"
-              src="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27600%27%20height%3D%27360%27%20viewBox%3D%270%200%20600%20360%27%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23e2e8f0%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2750%25%27%20font-family%3D%27Segoe%20UI%2C%20Arial%2C%20sans-serif%27%20font-size%3D%2744%27%20font-weight%3D%27700%27%20fill%3D%27%23334155%27%20text-anchor%3D%27middle%27%20dominant-baseline%3D%27middle%27%3EProject%201%3C/text%3E%3C/svg%3E"
-              alt="Ảnh minh họa dự án Landing Page" width="600" height="360" />
-            <div class="card-body">
-              <h3 class="card-title">Landing Page Sản Phẩm</h3>
-              <p class="card-desc">
-                Trang giới thiệu sản phẩm responsive, tối ưu tốc độ tải và SEO cơ bản.
-              </p>
-              <ul class="tag-list">
-                <li>HTML</li>
-                <li>CSS</li>
-                <li>Grid</li>
-              </ul>
-              <a class="card-link" href="#">Xem chi tiết →</a>
-            </div>
+        <h2 class="section-title">
+          DỰ ÁN <span class="green">CỦA TÔI</span>
+        </h2>
+
+        <div class="cards">
+
+          <article class="card reveal">
+            <div class="project-number">01</div>
+            <h3>Football CV</h3>
+
+            <p>
+              Website giới thiệu bản thân
+              theo phong cách sân vận động
+              và ánh sáng xanh neon.
+            </p>
+
+            <span class="project-type">
+              HTML • CSS • JAVASCRIPT
+            </span>
           </article>
 
-          <article class="card">
-            <img class="card-media"
-              src="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27600%27%20height%3D%27360%27%20viewBox%3D%270%200%20600%20360%27%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23dbeafe%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2750%25%27%20font-family%3D%27Segoe%20UI%2C%20Arial%2C%20sans-serif%27%20font-size%3D%2744%27%20font-weight%3D%27700%27%20fill%3D%27%231e40af%27%20text-anchor%3D%27middle%27%20dominant-baseline%3D%27middle%27%3EProject%202%3C/text%3E%3C/svg%3E"
-              alt="Ảnh minh họa dự án Todo App" width="600" height="360" />
-            <div class="card-body">
-              <h3 class="card-title">Ứng dụng Todo List</h3>
-              <p class="card-desc">
-                Ứng dụng quản lý công việc với lưu trữ cục bộ và giao diện tối giản.
-              </p>
-              <ul class="tag-list">
-                <li>JavaScript</li>
-                <li>Flexbox</li>
-              </ul>
-              <a class="card-link" href="#">Xem chi tiết →</a>
-            </div>
+          <article class="card reveal">
+            <div class="project-number">02</div>
+            <h3>Website Đội bóng</h3>
+
+            <p>
+              Ý tưởng website giới thiệu
+              đội bóng, thành viên,
+              lịch thi đấu và thành tích.
+            </p>
+
+            <span class="project-type">
+              Ý TƯỞNG DỰ ÁN
+            </span>
           </article>
 
-          <article class="card">
-            <img class="card-media"
-              src="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27600%27%20height%3D%27360%27%20viewBox%3D%270%200%20600%20360%27%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23ede9fe%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2750%25%27%20font-family%3D%27Segoe%20UI%2C%20Arial%2C%20sans-serif%27%20font-size%3D%2744%27%20font-weight%3D%27700%27%20fill%3D%27%235b21b6%27%20text-anchor%3D%27middle%27%20dominant-baseline%3D%27middle%27%3EProject%203%3C/text%3E%3C/svg%3E"
-              alt="Ảnh minh họa dự án Weather Dashboard" width="600" height="360" />
-            <div class="card-body">
-              <h3 class="card-title">Weather Dashboard</h3>
-              <p class="card-desc">
-                Bảng điều khiển thời tiết lấy dữ liệu từ API công khai, hiển thị theo thẻ.
-              </p>
-              <ul class="tag-list">
-                <li>API</li>
-                <li>Grid</li>
-              </ul>
-              <a class="card-link" href="#">Xem chi tiết →</a>
-            </div>
+          <article class="card reveal">
+            <div class="project-number">03</div>
+            <h3>Football Scoreboard</h3>
+
+            <p>
+              Ý tưởng xây dựng bảng tỷ số
+              bóng đá điện tử với
+              hiệu ứng hiện đại.
+            </p>
+
+            <span class="project-type">
+              Ý TƯỞNG DỰ ÁN
+            </span>
           </article>
 
-          <article class="card">
-            <img class="card-media"
-              src="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27600%27%20height%3D%27360%27%20viewBox%3D%270%200%20600%20360%27%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23dcfce7%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2750%25%27%20font-family%3D%27Segoe%20UI%2C%20Arial%2C%20sans-serif%27%20font-size%3D%2744%27%20font-weight%3D%27700%27%20fill%3D%27%23166534%27%20text-anchor%3D%27middle%27%20dominant-baseline%3D%27middle%27%3EProject%204%3C/text%3E%3C/svg%3E"
-              alt="Ảnh minh họa dự án Blog cá nhân" width="600" height="360" />
-            <div class="card-body">
-              <h3 class="card-title">Blog Cá Nhân</h3>
-              <p class="card-desc">
-                Blog tĩnh với bố cục dạng lưới, hỗ trợ đọc tốt trên mọi thiết bị.
-              </p>
-              <ul class="tag-list">
-                <li>HTML</li>
-                <li>CSS</li>
-              </ul>
-              <a class="card-link" href="#">Xem chi tiết →</a>
-            </div>
-          </article>
-
-        </div><!-- /.project-grid -->
+        </div>
       </div>
     </section>
 
-    <!-- ----- SECTION: Liên hệ ----- -->
-    <section id="contact" class="section">
-      <div class="container contact-inner">
-        <h2 class="section-title">Liên hệ</h2>
-        <p class="section-sub">Mở cho các cơ hội thực tập &amp; việc làm Frontend.</p>
+    <!-- THỐNG KÊ -->
+    <section class="skills-section">
+      <div class="container">
 
-        <ul class="contact-list">
-          <li><span class="contact-label">Email</span> <a href="mailto:an.nguyen@example.com">an.nguyen@example.com</a></li>
-          <li><span class="contact-label">GitHub</span> <a href="#">github.com/nguyenvanan</a></li>
-          <li><span class="contact-label">LinkedIn</span> <a href="#">linkedin.com/in/nguyenvanan</a></li>
-        </ul>
+        <p class="section-small">
+          04 / MY JOURNEY
+        </p>
+
+        <h2 class="section-title">
+          HÀNH TRÌNH <span class="green">HỌC TẬP</span>
+        </h2>
+
+        <div class="stats">
+
+          <div class="stat reveal">
+            <h3>01</h3>
+            <p>Sinh viên năm nhất</p>
+          </div>
+
+          <div class="stat reveal">
+            <h3>03</h3>
+            <p>Công nghệ đang học</p>
+          </div>
+
+          <div class="stat reveal">
+            <h3>∞</h3>
+            <p>Đam mê khám phá</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- LIÊN HỆ -->
+    <section id="contact" class="contact">
+      <div class="container">
+
+        <p class="section-small">
+          05 / CONTACT
+        </p>
+
+        <h2 class="section-title">
+          KẾT NỐI <span class="green">VỚI TÔI</span>
+        </h2>
+
+        <p>
+          Nếu bạn muốn trao đổi về lập trình,
+          công nghệ hoặc bóng đá,
+          hãy liên hệ với mình!
+        </p>
+
+        <div class="contact-buttons">
+
+          <a
+            href="https://github.com/leloc162008-cpu/CV/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            💻 GITHUB ↗
+          </a>
+
+          <a href="mailto:leloc162008@gmail.com">
+            ✉ EMAIL
+          </a>
+
+          <a href="tel:+84976561254">
+            ☎ ĐIỆN THOẠI
+          </a>
+
+        </div>
       </div>
     </section>
 
   </main>
 
-  <!-- ========================================================== -->
-  <!-- FOOTER                                                      -->
-  <!-- ========================================================== -->
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p>© 2026 Nguyễn Văn An. Thiết kế &amp; xây dựng bằng HTML5 + CSS3.</p>
-      <a href="#top" class="to-top">↑ Lên đầu trang</a>
-    </div>
+  <!-- CHÂN TRANG -->
+  <footer>
+    © <span id="year"></span>
+    \Lê Công Lộc |
+    FOOTBALL × TECHNOLOGY ⚽
   </footer>
 
-</body>
+  <!-- JAVASCRIPT -->
+  <script>
 
+    // Tự động cập nhật năm
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+    // Hiệu ứng xuất hiện khi cuộn trang
+    const elements =
+      document.querySelectorAll(".reveal");
+
+    if ("IntersectionObserver" in window) {
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+
+          entries.forEach((entry) => {
+
+            if (entry.isIntersecting) {
+              entry.target.classList.add("show");
+              observer.unobserve(entry.target);
+            }
+
+          });
+
+        },
+        {
+          threshold: 0.12
+        }
+      );
+
+      elements.forEach((element) => {
+        observer.observe(element);
+      });
+
+    } else {
+
+      elements.forEach((element) => {
+        element.classList.add("show");
+      });
+
+    }
+
+  </script>
+
+</body>
 </html>
+
+
