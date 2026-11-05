@@ -12,6 +12,11 @@ Trang portfolio cá nhân dạng tĩnh, giới thiệu Lê Công Lộc với vai
 
 > Các dự án trong trang hiện là nội dung minh họa; liên kết "Xem chi tiết" chưa được cấu hình. Phần thời tiết cũng chỉ là nội dung mô tả mẫu, chưa tích hợp API.
 
+## Ảnh giao diện
+
+- [Ảnh desktop](./assets/img/portfolio-desktop.png)
+- [Ảnh điện thoại](./assets/img/portfolio-mobile.png)
+
 ## Công nghệ
 
 - HTML5: cấu trúc và nội dung trang.
