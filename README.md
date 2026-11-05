@@ -1,6 +1,6 @@
-# Portfolio CV - Nguyễn Văn An
+# Portfolio CV - Lê Công Lộc
 
-Trang portfolio cá nhân dạng tĩnh, giới thiệu Nguyễn Văn An với vai trò Frontend Developer. Dự án trình bày thông tin cá nhân, kỹ năng, các dự án tiêu biểu và kênh liên hệ trong một trang web responsive.
+Trang portfolio cá nhân dạng tĩnh, giới thiệu Lê Công Lộc với vai trò Frontend Developer. Dự án trình bày thông tin cá nhân, kỹ năng, các dự án tiêu biểu và kênh liên hệ trong một trang web responsive.
 
 ## Chức năng
 
@@ -64,7 +64,7 @@ Nếu tải file ZIP, giải nén rồi mở terminal tại thư mục `CV-main`
 
 Dự án không có file cấu hình môi trường, biến môi trường hoặc khóa API.
 
-Để cá nhân hóa nội dung, sửa trực tiếp `index.html`, bao gồm tên, phần giới thiệu, kỹ năng, dự án và thông tin liên hệ. Email hiện tại (`an.nguyen@example.com`) và các liên kết GitHub/LinkedIn là dữ liệu mẫu; hãy thay bằng thông tin thật trước khi triển khai. Thay ảnh `assets/img/avatar.jpg` nếu cần, đồng thời giữ nguyên tên file hoặc cập nhật đường dẫn ảnh trong HTML.
+Để cá nhân hóa nội dung, sửa trực tiếp `index.html`, bao gồm tên, phần giới thiệu, kỹ năng, dự án và thông tin liên hệ. Email hiện tại (`leloc162008@gmail.com`) và các liên kết GitHub/LinkedIn là dữ liệu mẫu; hãy thay bằng thông tin thật trước khi triển khai. Thay ảnh `assets/img/avatar.jpg` nếu cần, đồng thời giữ nguyên tên file hoặc cập nhật đường dẫn ảnh trong HTML.
 
 Để đổi giao diện, chỉnh các biến màu và quy tắc trong `assets/css/styles.css`.
 
@@ -130,9 +130,9 @@ Mở <http://localhost:8080> để xem trang. Dừng container bằng `Ctrl+C`. 
 
 ## Thông tin liên hệ
 
-- Tác giả hiển thị trên trang: Nguyễn Văn An
-- Email mẫu: `an.nguyen@example.com`
-- GitHub mẫu: `github.com/nguyenvanan`
-- LinkedIn mẫu: `linkedin.com/in/nguyenvanan`
+- Tác giả hiển thị trên trang: Lê Công Lộc
+- Email: `leloc162008@gmail.com`
+- GitHub mẫu: `github.com/leloc`
+- LinkedIn mẫu: `linkedin.com/in/leloc`
 
 Vui lòng cập nhật các thông tin mẫu trong `index.html` trước khi sử dụng hoặc công khai dự án.
